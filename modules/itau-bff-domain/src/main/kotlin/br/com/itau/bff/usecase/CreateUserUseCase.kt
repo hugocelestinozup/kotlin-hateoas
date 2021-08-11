@@ -18,7 +18,7 @@ class CreateUserUseCase(
 
     private val logger: Logger = LoggerFactory.getLogger(CreateUserUseCase::class.java)
 
-    fun execute(userDomain: UserDomain) {
+    fun execute(userDomain: UserDomain) : UserDomain {
         val registeredUser = getUserByEmailGateway.execute(userDomain.email)
 
         if (registeredUser.isPresent) {
@@ -27,7 +27,7 @@ class CreateUserUseCase(
         }
 
         val userToBeSaved = updateProperties(userDomain)
-        saveUserGateway.execute(userToBeSaved)
+        return saveUserGateway.execute(userToBeSaved)
     }
 
     private fun updateProperties(userDomain: UserDomain): UserDomain {

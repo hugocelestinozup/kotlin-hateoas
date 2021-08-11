@@ -12,6 +12,7 @@ import br.com.itau.bff.usecase.GetUserByEmailUseCase
 import br.com.itau.bff.usecase.GetUserByIdUseCase
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.hateoas.server.mvc.linkTo
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
@@ -26,36 +27,48 @@ class UserController(
 
     private val logger: Logger = LoggerFactory.getLogger(UserController::class.java)
 
-    override fun createUser(userRequest: UserRequest): MessageResponse {
+    override fun createUser(userRequest: UserRequest): UserResponse {
         logger.info("User API receive a POST to create a new User")
 
-        val userDomain = UserRequestToUserDomainTranslator().translate(userRequest)
-        createUserUseCase.execute(userDomain)
+        var userDomain = UserRequestToUserDomainTranslator().translate(userRequest)
+        userDomain = createUserUseCase.execute(userDomain)
+
+        val userResponse = UserDomainToUserResponseTranslator().translate(userDomain)
+
+        val linkById = linkTo<UserController> { getUserById(userDomain.publicId!!) }
+        val linkByEmail = linkTo<UserController> { getUserByEmail(userDomain.email) }
+
+        userResponse.add(mutableListOf(linkById.withSelfRel(), linkByEmail.withSelfRel()))
 
         logger.info("User API finished to save the user")
 
-        return MessageResponse(
-            HttpStatusResponse.CREATED.httpStatus,
-            HttpStatusResponse.CREATED.httpMessage
-        )
+        return userResponse
     }
 
     override fun getUserById(userId: UUID): UserResponse {
-        logger.info("User API receive a GET to find an User")
+        logger.info("User API receive a GET to find an User by Id")
 
         val userDomain = getUserByIdUseCase.execute(userId)
+        val userResponse = UserDomainToUserResponseTranslator().translate(userDomain)
+
+        val linkById = linkTo<UserController> { getUserById(userDomain.publicId!!) }
+        userResponse.add(linkById.withSelfRel())
 
         logger.info("User API finished to find the user")
-        return UserDomainToUserResponseTranslator().translate(userDomain)
+        return userResponse
     }
 
     override fun getUserByEmail(email: String): UserResponse {
-        logger.info("User API receive a GET to find an User")
+        logger.info("User API receive a GET to find an User by Email")
 
         val userDomain = getUserByEmailUseCase.execute(email)
+        val userResponse = UserDomainToUserResponseTranslator().translate(userDomain)
+
+        val linkByEmail = linkTo<UserController> { getUserByEmail(userDomain.email) }
+        userResponse.add(linkByEmail.withSelfRel())
 
         logger.info("User API finished to find the user")
-        return UserDomainToUserResponseTranslator().translate(userDomain)
+        return userResponse
     }
 
 }

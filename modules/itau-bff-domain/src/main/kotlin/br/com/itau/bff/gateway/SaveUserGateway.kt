@@ -4,6 +4,6 @@ import br.com.itau.bff.domain.UserDomain
 
 interface SaveUserGateway {
 
-    fun execute(userDomain: UserDomain)
+    fun execute(userToBeSaved: UserDomain): UserDomain
 
 }

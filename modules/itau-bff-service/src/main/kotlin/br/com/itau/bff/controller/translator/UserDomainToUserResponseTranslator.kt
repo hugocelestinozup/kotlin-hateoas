@@ -1,7 +1,6 @@
 package br.com.itau.bff.controller.translator
 
 import br.com.itau.bff.domain.UserDomain
-import br.com.itau.bff.gateway.database.postgres.model.UserDB
 import br.com.itau.bff.model.UserResponse
 
 class UserDomainToUserResponseTranslator {
