@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>itau-bff-domain</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <name>itau-bff-domain</name>
     <description>itau-bff-domain</description>
@@ -12,7 +12,7 @@
     <parent>
         <artifactId>itau-bff</artifactId>
         <groupId>br.com.itau.bff</groupId>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
