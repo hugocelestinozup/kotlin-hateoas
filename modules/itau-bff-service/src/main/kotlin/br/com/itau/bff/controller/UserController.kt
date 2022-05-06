@@ -3,8 +3,6 @@ package br.com.itau.bff.controller
 import br.com.itau.bff.api.UserApi
 import br.com.itau.bff.controller.translator.UserDomainToUserResponseTranslator
 import br.com.itau.bff.controller.translator.UserRequestToUserDomainTranslator
-import br.com.itau.bff.model.HttpStatusResponse
-import br.com.itau.bff.model.MessageResponse
 import br.com.itau.bff.model.UserRequest
 import br.com.itau.bff.model.UserResponse
 import br.com.itau.bff.usecase.CreateUserUseCase
@@ -38,7 +36,7 @@ class UserController(
         val linkById = linkTo<UserController> { getUserById(userDomain.publicId!!) }
         val linkByEmail = linkTo<UserController> { getUserByEmail(userDomain.email) }
 
-        userResponse.add(mutableListOf(linkById.withSelfRel(), linkByEmail.withSelfRel()))
+        userResponse.add(listOf(linkById.withSelfRel(), linkByEmail.withSelfRel()))
 
         logger.info("User API finished to save the user")
 

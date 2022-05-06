@@ -8,12 +8,15 @@ import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.validation.Valid
 
-@RequestMapping("/v1/user")
 @Api(tags = ["User"])
+@RequestMapping("/v1/user",
+    produces = [MediaType.APPLICATION_JSON_VALUE],
+    consumes = [MediaType.APPLICATION_JSON_VALUE])
 interface UserApi {
 
     @ApiOperation(value = "Create a new User", notes = "Create a new User")

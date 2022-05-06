@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>itau-bff-service</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
     <name>itau-bff-service</name>
     <description>itau-bff-service</description>
@@ -12,13 +12,13 @@
     <parent>
         <artifactId>itau-bff</artifactId>
         <groupId>br.com.itau.bff</groupId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <properties>
-        <itau-bff-client.version>0.0.2</itau-bff-client.version>
-        <itau-bff-domain.version>0.0.2</itau-bff-domain.version>
+        <itau-bff-client.version>0.0.3</itau-bff-client.version>
+        <itau-bff-domain.version>0.0.3</itau-bff-domain.version>
     </properties>
 
     <dependencies>
@@ -52,13 +52,13 @@
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk</artifactId>
-            <version>1.12.1</version>
+            <version>1.12.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.ninja-squad</groupId>
             <artifactId>springmockk</artifactId>
-            <version>3.1.0</version>
+            <version>3.1.1</version>
             <scope>test</scope>
         </dependency>
 
